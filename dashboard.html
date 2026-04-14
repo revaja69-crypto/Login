@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - PWA Local</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+        .container { background: white; padding: 30px; border-radius: 8px; max-width: 500px; margin: auto; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #28a745; }
+        .user-info { margin: 20px 0; padding: 15px; background: #e9ecef; border-radius: 5px; text-align: left; }
+        button { padding: 10px 20px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #c82333; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Selamat Datang!</h1>
+        <p>Anda berhasil login ke sistem lokal IndexedDB.</p>
+        
+        <div class="user-info" id="user-display">
+            </div>
+
+        <button onclick="logout()">Keluar / Logout</button>
+    </div>
+
+    <script>
+        // 1. Proteksi Halaman: Cek apakah session ada
+        const sessionData = localStorage.getItem("userSession");
+
+        if (!sessionData) {
+            // Jika tidak ada data di localStorage, lempar kembali ke login
+            alert("Akses ditolak! Silakan login terlebih dahulu.");
+            window.location.href = "index.html";
+        } else {
+            // 2. Tampilkan data user yang sedang login
+            const user = JSON.parse(sessionData);
+            document.getElementById('user-display').innerHTML = `
+                <strong>Nama:</strong> ${user.name} <br>
+                <strong>Email:</strong> ${user.email} <br>
+                <strong>Status:</strong> Online (Local Mode)
+            `;
+        }
+
+        // 3. Fungsi Logout
+        function logout() {
+            if (confirm("Apakah anda yakin ingin keluar?")) {
+                localStorage.removeItem("userSession");
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+</body>
+</html>

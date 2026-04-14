@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Auth IndexedDB</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; background: #f4f4f4; }
+        .card { background: white; padding: 20px; border-radius: 8px; shadow: 0 2px 5px rgba(0,0,0,0.1); width: 300px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #28a745; color: white; border: none; cursor: pointer; }
+        .toggle { font-size: 0.8em; text-align: center; margin-top: 10px; cursor: pointer; color: blue; }
+    </style>
+</head>
+<body>
+    <div class="card" id="auth-card">
+        <h2 id="form-title">Login</h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <div id="reg-fields" style="display:none;">
+            <input type="text" id="name" placeholder="Nama Lengkap">
+        </div>
+        <button id="main-btn" onclick="handleAuth()">Masuk</button>
+        <div class="toggle" onclick="toggleForm()" id="toggle-link">Belum punya akun? Daftar</div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Registrasi Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
